@@ -13,5 +13,7 @@
             "email": "gabrielgodoi452@gmail.com"
         }
     ],
-    "require": {}
+    "require-dev": {
+        "phpunit/phpunit": "^11"
+    }
 }
