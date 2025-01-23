@@ -1,0 +1,17 @@
+{
+    "name": "application/app",
+    "description": "a practical test",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Application\\App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "GabrielGodoi452",
+            "email": "gabrielgodoi452@gmail.com"
+        }
+    ],
+    "require": {}
+}
