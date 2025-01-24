@@ -1,6 +1,8 @@
 <?php
 
-namespace Application\App\Router;
+namespace Application\App\Routes;
+
+use Application\App\Enums\HttpStatusCode;
 
 class Router
 {
@@ -29,7 +31,7 @@ class Router
             }
         }
 
-        http_response_code(404);
+        http_response_code(HttpStatusCode::NOT_FOUND);
         echo json_encode(
             [
                 "Msg" => "Route not found or method not allowed"
@@ -49,6 +51,10 @@ class Router
     public static function put($url, $callback)
     {
         self::addRoutes("PUT", $url, $callback);
+    }
+    public static function patch($url, $callback)
+    {
+        self::addRoutes("Patch", $url, $callback);
     }
     public static function delete($url, $callback)
     {

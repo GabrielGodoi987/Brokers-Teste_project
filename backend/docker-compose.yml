@@ -1,26 +1,23 @@
-version: "3.8"
-
 services:
   php:
     container_name: app-api
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     ports:
-      - "80:80"
+      - "8080:8080"
     volumes:
-      - .:/var/www/html
+      - .:/app
     depends_on:
-      - php-db
+      - db
 
-  php-db:
-    image: mysql:5.7
-    container_name: php-db
-    environment:
-      MYSQL_PASSWORD: docker
-      MYSQL_DATABASE: phpapiDb
-      MYSQL_USER: root
-    ports:
-       - "3306:3306"
+  db:
+    container_name: api-db
+    image: postgres:latest
     volumes:
-      - .docker/db_data:/var/lib/mysql
+     - .docker/dbdata:/var/lib/postgresql/data
+    restart: always
+    tty: true
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=php-db

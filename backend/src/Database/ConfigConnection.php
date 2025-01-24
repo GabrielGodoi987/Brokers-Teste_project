@@ -11,17 +11,38 @@ class ConfigConnection
     private $pdo;
     private static $instance;
 
-    public function __construct()
+    public function __construct($databaseType = "postgres")
     {
         $config = require __DIR__ . '/Connection.php';
 
-        $sqlitePath = $config['mysql'];
-
+        $sqlPath = $config['postgres'];
+        $driver = $sqlPath['driver'];
         try {
-            $this->pdo = new PDO("sqlite:" . __DIR__ . '/' . $sqlitePath);
+            switch ($databaseType) {
+                case 'sqlite':
+                    $dsn = "{$driver}:{$sqlPath['database']}";
+                    $this->pdo = new PDO($dsn);
+                    break;
+
+                case 'mysql':
+                case 'postgres':
+                    $dsn = "{$driver}:host={$sqlPath['host']};port={$sqlPath['port']};dbname={$sqlPath['database']}";
+                    $this->pdo = new PDO($dsn, $sqlPath['username'], $sqlPath['password']);
+                    break;
+
+                case 'sqlsrv':
+                    $dsn = "{$driver}:Server={$sqlPath['host']},{$sqlPath['port']};Database={$sqlPath['database']}";
+                    $this->pdo = new PDO($dsn, $sqlPath['username'], $sqlPath['password']);
+                    break;
+
+                default:
+                    die("Driver de banco de dados não suportado.");
+            }
+
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            echo "Conexão com $databaseType bem-sucedida!";
         } catch (PDOException $e) {
-            die("Erro de conexão com o banco de dados: " . $e->getMessage());
+            die("Erro de conexão com $databaseType: " . $e->getMessage());
         }
     }
 

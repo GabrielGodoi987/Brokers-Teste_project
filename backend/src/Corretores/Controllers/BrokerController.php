@@ -1,45 +1,44 @@
 <?php
+namespace Application\App\Corretores\Controllers;
 
-use Application\App\Corretores\Models\BrokerModel;
+use Application\App\Corretores\Dto\BrokerDto;
 use Application\App\Corretores\Services\BrokerService;
 
 class BrokerController
 {
     private BrokerService $brokerService;
-    public function __construct(BrokerService $brokerService)
+    public function __construct()
     {
-        $this->brokerService = $brokerService;
+        $this->brokerService = new BrokerService();
     }
 
     public function findAll()
     {
-        return $this->brokerService->findAll();
+        echo $this->brokerService->findAll();
     }
 
     public function findById($id)
     {
-        return $this->brokerService->findById($id);
+        echo $this->brokerService->findById($id);
     }
 
     public function findByCreci($creci)
     {
-        return $this->brokerService->findByCreci($creci);
+        echo $this->brokerService->findByCreci($creci);
     }
 
     public function delete($id)
     {
-        return $this->brokerService->delete($id);
+        echo $this->brokerService->delete($id);
     }
 
-    public function createBroker(BrokerModel $data)
+    public function createBroker(BrokerDto $data)
     {
-        return $this->brokerService->createBroker($data);
+        echo $this->brokerService->createBroker($data);
     }
 
-    public function updateBroker($id, BrokerModel $data)
+    public function updateBroker($id, BrokerDto $data)
     {
-        return $this->brokerService->updateBroker($id, $data);
+        echo $this->brokerService->updateBroker($id, $data);
     }
-
-    
 }

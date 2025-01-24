@@ -1,12 +1,21 @@
-FROM php:7.4-apache
+FROM php:8.2-cli
 
-WORKDIR /var/www/html
-
-COPY . /var/www/html
+WORKDIR /usr/src/app
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN composer install
+RUN apt-get update && apt-get install -y \
+    zlib1g-dev \
+    libzip-dev \
+    unzip \
+    && rm -rf /var/lib/apt/lists/*
+
+
+COPY composer*.json ./
+
+RUN composer install --no-interaction --prefer-dist
+
+COPY . .
 
 EXPOSE 8080
 

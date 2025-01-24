@@ -1,6 +1,6 @@
 <?php
 
-namespace Backend\Products\Database\Config;
+namespace Application\App\Database;
 
 return [
     "sqlite" => [
@@ -10,37 +10,27 @@ return [
     ],
     "mysql" => [
         "driver" => "mysql",
-        "host" => "127.0.0.1",
+        "host" => "db",
         "port" => "3306",
-        "database" => "your_database",
-        "username" => "your_username",
-        "password" => "your_password",
-        "charset" => "utf8mb4",
-        "collation" => "utf8mb4_unicode_ci",
-        "prefix" => "",
-        "strict" => true,
-        "engine" => null,
+        "database" => "php-db",
+        "username" => "root",
+        "password" => "docker",
+        "charset" => "utf8"
     ],
-    "pgsql" => [
-        "driver" => "pgsql",
-        "host" => "127.0.0.1",
+    "postgres" => [
+        "driver" => "postgres",
+        "host" => "db",
         "port" => "5432",
-        "database" => "your_database",
-        "username" => "your_username",
-        "password" => "your_password",
-        "charset" => "utf8",
-        "prefix" => "",
-        "schema" => "public",
-        "sslmode" => "prefer",
+        "database" => "php-db",
+        "username" => "root",
+        "password" => "docker",
     ],
     "sqlsrv" => [
         "driver" => "sqlsrv",
-        "host" => "localhost",
+        "host" => "db",
         "port" => "1433",
-        "database" => "your_database",
-        "username" => "your_username",
-        "password" => "your_password",
-        "charset" => "utf8",
-        "prefix" => "",
+        "database" => "php-db",
+        "username" => "root",
+        "password" => "docker",
     ],
 ];
