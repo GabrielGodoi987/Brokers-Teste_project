@@ -58,7 +58,7 @@ class BrokerRepository
             $stmt->bindParam(":cpf", $cpf);
             $stmt->bindParam(":creci", $creci);
             $stmt->execute();
-            $data = $stmt->lastInsertId();
+            $data = $this->pdo->lastInsertId();
 
             return $data;
         } catch (PDOException $th) {

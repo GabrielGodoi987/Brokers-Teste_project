@@ -16,22 +16,20 @@ class ConfigConnection
         $config = require __DIR__ . '/Connection.php';
 
         $sqlPath = $config['postgres'];
-        $driver = $sqlPath['driver'];
         try {
             switch ($databaseType) {
                 case 'sqlite':
-                    $dsn = "{$driver}:{$sqlPath['database']}";
+                    $dsn = "{$sqlPath['driver']}:{$sqlPath['database']}";
                     $this->pdo = new PDO($dsn);
                     break;
 
-                case 'mysql':
                 case 'postgres':
-                    $dsn = "{$driver}:host={$sqlPath['host']};port={$sqlPath['port']};dbname={$sqlPath['database']}";
-                    $this->pdo = new PDO($dsn, $sqlPath['username'], $sqlPath['password']);
+                    $dsn = "postgres:host=db;port=5432;dbname=php-db";
+                    $this->pdo = new PDO($dsn, "postgres", "docker");
                     break;
 
                 case 'sqlsrv':
-                    $dsn = "{$driver}:Server={$sqlPath['host']},{$sqlPath['port']};Database={$sqlPath['database']}";
+                    $dsn = "{$sqlPath['driver']}:Server={$sqlPath['host']},{$sqlPath['port']};Database={$sqlPath['database']}";
                     $this->pdo = new PDO($dsn, $sqlPath['username'], $sqlPath['password']);
                     break;
 
