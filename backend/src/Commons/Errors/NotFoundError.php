@@ -23,6 +23,7 @@ class NotFoundError extends Exception
     public function __toString(): string
     {
         $details = !empty($this->details) ? json_encode($this->details) : 'None';
+        http_response_code(HttpStatusCode::NOT_FOUND);
         return __CLASS__ . ": [{$this->code}]: {$this->message} - Details: {$details}\n";
     }
 }

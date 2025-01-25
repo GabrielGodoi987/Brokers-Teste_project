@@ -39,6 +39,7 @@ class BrokerService
         $this->brokerModel->setCpf($data->cpf);
         $this->brokerModel->setCreci($data->creci);
 
+        http_response_code(HttpStatusCode::OK);
         return json_encode([
             "data" => $this->brokerRepository->create($this->brokerModel)
         ]);
@@ -56,7 +57,7 @@ class BrokerService
         if (!$user) {
             throw new NotFoundError("This user: $data->name, does'nt exists");
         }
-
+        http_response_code(HttpStatusCode::OK);
         return json_encode([
             "data" => $this->brokerRepository->update($id, $this->brokerModel)
         ]);
@@ -70,6 +71,7 @@ class BrokerService
                 "reason" => "Required data is missing."
             ]);
         }
+        http_response_code(HttpStatusCode::OK);
         return json_encode([
             "data" => $this->brokerRepository->delete($id)
         ]);
@@ -82,6 +84,7 @@ class BrokerService
                 "reason" => "Required data is missing."
             ]);
         }
+        http_response_code(HttpStatusCode::OK);
         return json_encode([
             "msg" => $this->brokerRepository->findById($id)
         ]);
@@ -94,6 +97,7 @@ class BrokerService
                 "reason" => "Required data is missing."
             ]);
         }
+        http_response_code(HttpStatusCode::OK);
         return json_encode([
             "msg" => $this->brokerRepository->findByCreci($creci)
         ]);
@@ -102,6 +106,7 @@ class BrokerService
     public function findAll()
     {
         try {
+            http_response_code(HttpStatusCode::OK);
             return json_encode([
                 "data" => $this->brokerRepository->findAll()
             ]);
