@@ -13,6 +13,8 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+RUN docker-php-ext-install pdo_pgsql
+
 COPY composer*.json composer.lock ./
 RUN composer install --no-cache --no-scripts
 
@@ -20,4 +22,4 @@ COPY . .
 
 EXPOSE 8080
 
-CMD ["tail", "-f", "/dev/null"]
+CMD ["php", "-S", "0.0.0.0:8080", "/src/index.php"]

@@ -1,3 +1,7 @@
+networks:
+  my-network:
+    driver: bridge
+
 services:
   api:
     container_name: api
@@ -8,13 +12,17 @@ services:
       - .:/app
     ports:
       - "8000:8080"
+    expose:
+      - 8080
     restart: always
+    networks:
+      - my-network
     depends_on:
       - db
 
   db:
+    build: .docker/postgres
     container_name: api-db
-    image: postgres:latest
     volumes:
       - .docker/dbdata:/var/lib/postgresql/data
     restart: always
@@ -24,4 +32,6 @@ services:
       - 5432
     environment:
       POSTGRES_PASSWORD: docker
-      POSTGRES_DB: php-db
+      POSTGRES_DB: phpdb
+    networks:
+      - my-network

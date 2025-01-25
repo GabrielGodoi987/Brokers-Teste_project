@@ -24,8 +24,11 @@ class ConfigConnection
                     break;
 
                 case 'postgres':
-                    $dsn = "postgres:host=db;port=5432;dbname=php-db";
-                    $this->pdo = new PDO($dsn, "postgres", "docker");
+                    $dsn = "pgsql:host=localhost;port=5432;dbname=phpdb";
+                    $this->pdo = new PDO($dsn, "postgres", "docker", [
+                        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    ]);
                     break;
 
                 case 'sqlsrv':
@@ -40,7 +43,7 @@ class ConfigConnection
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             echo "Conexão com $databaseType bem-sucedida!";
         } catch (PDOException $e) {
-            die("Erro de conexão com $databaseType: " . $e->getMessage());
+            die("Erro de conexão com $databaseType: " . $e);
         }
     }
 
