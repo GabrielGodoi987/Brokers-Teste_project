@@ -13,8 +13,8 @@
   </head>
   <body>
     <section
-      class="d-flex justify-content mt-3"
-      style="margin: 0 auto; width: 80%;"
+      class="d-flex justify-content flex-column gap-5 mt-3"
+      style="margin: 0 auto; width: 80%"
     >
       <form class="bg-white p-5 rounded shadow-sm w-100 w-md-50">
         <h2 class="text-center mb-4">Cadastro de Corretores</h2>
@@ -49,7 +49,21 @@
           <button type="submit" class="btn btn-primary">Cadastrar</button>
         </div>
       </form>
-      <!-- the crud list goes here -->
+
+      <!-- crud com todos os cadastros -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="col">nome</th>
+            <th class="col">cpf</th>
+            <th class="col">creci</th>
+            <th class="col"></th>
+          </tr>
+        </thead>
+        <tbody id="list">
+
+        </tbody>
+      </table>
     </section>
 
     <script
@@ -62,5 +76,7 @@
       integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
       crossorigin="anonymous"
     ></script>
+
+    <script type="module" src="../js/Service.js"></script>
   </body>
 </html>

@@ -23,34 +23,34 @@ Router::get('/', function () {
 
 // findall
 Router::get("/brokers", function () use ($brokerController) {
-    echo $brokerController->findAll();
+    $brokerController->findAll();
 });
 
 // create
 Router::post("/brokers", function () use ($brokerController) {
     $input = json_decode(file_get_contents("php://input"));
-    echo $brokerController->createBroker($input);
+    $brokerController->createBroker($input);
 });
 
 // update
 Router::put("/brokers/{id}", function ($id) use ($brokerController) {
     $input = json_decode(file_get_contents("php://input"));
-    echo $brokerController->updateBroker($id, $input);
+    $brokerController->updateBroker($id, $input);
 });
 
 // delete
 Router::delete("/brokers/{id}", function ($id) use ($brokerController) {
-    echo $brokerController->delete($id);
+    $brokerController->delete($id);
 });
 
 // find by creci
 Router::get('/brokers/{creci}', function ($creci) use ($brokerController) {
-    echo $brokerController->findByCreci($creci);
+    $brokerController->findByCreci($creci);
 });
 
 // find one by id
 Router::get("/brokers/{id}", function ($id) use ($brokerController) {
-    echo $brokerController->findById($id);
+    $brokerController->findById($id);
 });
 
 

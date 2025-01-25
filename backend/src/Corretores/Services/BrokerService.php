@@ -38,7 +38,10 @@ class BrokerService
         $this->brokerModel->setName($data->name);
         $this->brokerModel->setCpf($data->cpf);
         $this->brokerModel->setCreci($data->creci);
-        return $this->brokerRepository->create($this->brokerModel);
+
+        return json_encode([
+            "data" => $this->brokerRepository->create($this->brokerModel)
+        ]);
     }
     public function updateBroker($id, BrokerDto $data)
     {
@@ -54,7 +57,9 @@ class BrokerService
             throw new NotFoundError("This user: $data->name, does'nt exists");
         }
 
-        return $this->brokerRepository->update($id, $this->brokerModel);
+        return json_encode([
+            "data" => $this->brokerRepository->update($id, $this->brokerModel)
+        ]);
     }
 
     public function delete($id)
@@ -65,7 +70,9 @@ class BrokerService
                 "reason" => "Required data is missing."
             ]);
         }
-        return $this->brokerRepository->delete($id);
+        return json_encode([
+            "data" => $this->brokerRepository->delete($id)
+        ]);
     }
     public function findById($id)
     {
@@ -75,7 +82,9 @@ class BrokerService
                 "reason" => "Required data is missing."
             ]);
         }
-        return $this->brokerRepository->findById($id);
+        return json_encode([
+            "msg" => $this->brokerRepository->findById($id)
+        ]);
     }
     public function findByCreci($creci)
     {
@@ -85,13 +94,17 @@ class BrokerService
                 "reason" => "Required data is missing."
             ]);
         }
-        return $this->brokerRepository->findByCreci($creci);
+        return json_encode([
+            "msg" => $this->brokerRepository->findByCreci($creci)
+        ]);
     }
 
     public function findAll()
     {
         try {
-            return $this->brokerRepository->findAll();
+            return json_encode([
+                "data" => $this->brokerRepository->findAll()
+            ]);
         } catch (Throwable $th) {
             throw new PDOException($th);
         }
